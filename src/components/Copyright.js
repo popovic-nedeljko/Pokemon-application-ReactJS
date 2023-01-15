@@ -6,7 +6,7 @@ const Sidebar = () => {
       <p>
         &copy; Copyright by
         <a
-          class='ln-link'
+          className='ln-link'
           target='_blank'
           href='https://github.com/popovic-nedeljko'
         >
