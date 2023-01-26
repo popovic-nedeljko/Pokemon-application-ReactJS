@@ -6,12 +6,13 @@ const usePokemonData = (id) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [pokemonData, setPokemonData] = useState(null);
+  const [pokemonId, setPokemonId] = useState();
 
   useEffect(() => {
     async function getPokemonData() {
       try {
         setLoading(true);
-        const response = await fetch(`${id > 0 ? `${url}${id}` : ''}`);
+        const response = await fetch(`${url}${id}`);
         const data = await response.json();
 
         if (data) {
@@ -21,15 +22,15 @@ const usePokemonData = (id) => {
             height: data.height,
             picture: data.sprites.other['official-artwork'].front_default,
             pictureSub: data.sprites.other.dream_world.front_default,
-            Hp: data.stats[0].base_stat,
+            health: data.stats[0].base_stat,
             attack: data.stats[1].base_stat,
             defense: data.stats[2].base_stat,
             speed: data.stats[5].base_stat,
             type: data.types.map((item) => item.type.name),
-            ability: data.abilities.map((ab) => ab.ability.name).join(' ** '),
+            abilities: data.abilities.map((ab) => ab.ability.name).join(' ** '),
             pageNumber: Math.ceil(+data.id / 10),
           };
-
+          setPokemonId(+data.id);
           setPokemonData(newPokemon);
         } else {
           setPokemonData(null);
@@ -45,7 +46,7 @@ const usePokemonData = (id) => {
     getPokemonData();
   }, [id]);
 
-  return { loading, error, pokemonData };
+  return { loading, error, pokemonData, pokemonId };
 };
 
 export default usePokemonData;

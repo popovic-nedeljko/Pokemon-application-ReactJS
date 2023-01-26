@@ -1,0 +1,40 @@
+@import '../../sass/variables.scss';
+.header {
+  grid-area: head;
+  background-color: $color-white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+
+  @media only screen and (max-width: $bp-large) {
+    justify-content: space-between;
+  }
+  @media only screen and (max-width: $bp-small) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__logo {
+    padding: 0rem 2rem;
+    height: 7rem;
+    display: block;
+    transition: all 0.2s;
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    @media only screen and (max-width: $bp-large) {
+      height: 6rem;
+    }
+    @media only screen and (max-width: $bp-medium) {
+      margin-left: 2rem;
+      &:hover {
+        transform: none;
+      }
+    }
+    @media only screen and (max-width: $bp-small) {
+      height: 11rem;
+    }
+  }
+}

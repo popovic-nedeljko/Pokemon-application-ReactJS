@@ -1,0 +1,26 @@
+@import '../../../sass/variables.scss';
+.pagination {
+  padding: 2rem 3.5rem;
+
+  @media only screen and (max-width: $bp-large) {
+    padding: 2rem 2.8rem;
+  }
+
+  @media only screen and (max-width: $bp-medium-low) {
+    padding: 2rem 1rem;
+  }
+  @media only screen and (max-width: $bp-small) {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.3rem;
+  }
+
+  &__btn {
+    &--prev {
+      float: left;
+    }
+    &--next {
+      float: right;
+    }
+  }
+}

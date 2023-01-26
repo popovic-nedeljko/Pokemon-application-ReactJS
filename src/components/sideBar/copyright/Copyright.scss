@@ -1,0 +1,22 @@
+@import '../../../sass/variables.scss';
+
+.copyright {
+  position: absolute;
+  bottom: 1rem;
+  text-align: center;
+  color: $color-grey-dark-2;
+  font-size: 1.2rem;
+  padding: 0 3.5rem;
+  margin-top: 4rem;
+
+  .ln-link:link,
+  .ln-link:visited {
+    color: $color-grey-dark-2;
+  }
+  @media only screen and (max-width: $bp-medium-low) {
+    font-size: 1rem;
+  }
+  @media only screen and (max-width: $bp-small) {
+    display: none;
+  }
+}

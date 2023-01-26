@@ -1,23 +1,22 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-// import pages
-import Home from './pages/Home';
-import About from './pages/About';
-import SinglePokemon from './components/SinglePokemon';
-import Sidebar from './components/Sidebar';
-import Error from './pages/Error';
-import Navbar from './components/Navbar';
+// import { Route, Routes } from 'react-router-dom';
 
-// import components
+import SinglePokemon from './components/main_pokemon/SinglePokemon';
+import Sidebar from './components/sideBar/Sidebar';
+import Error from './pages/Error';
+import Navbar from './components/navigationBar/Navbar';
+import Popup from './components/popup/Popup';
 
 function App() {
   return (
     <div className='container'>
-      <BrowserRouter>
-        <Navbar />
-        <Sidebar />
-        <SinglePokemon />
-      </BrowserRouter>
+      <Navbar />
+      <Sidebar />
+      <SinglePokemon />
+      <Popup />
+      {/* <Routes>
+        <Route path='popup' element={<Popup />} />
+      </Routes> */}
     </div>
   );
 }

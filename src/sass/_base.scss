@@ -1,39 +1,4 @@
-//colors
-$color-primary: #f38e82;
-$color-red-1: rgb(229, 150, 150);
-$color-red-2: #a80b0b;
-$color-grad-1: rgb(255, 255, 255);
-$color-grad-2: #439bfa;
-
-$color-green-light: #7ed56f;
-$color-green-dark: #28b485;
-$color-yelow-dark: #ffb900;
-$color-yelow-light: rgb(255, 204, 0);
-$color-blue-light: #2998ff;
-$color-blue-dark: #5643fa;
-
-$color-grey-light-1: #f9f5f3;
-$color-grey-light-2: #f2efee;
-$color-grey-light-3: #d3c7c3;
-$color-grey-dark-1: #615551;
-$color-grey-dark-2: #918581;
-$color-grey-dark-3: #333;
-
-$color-white: #fff;
-$color-black: #000;
-$hp: #19d577;
-$speed: #f9e565;
-$attack: #d80000;
-$defense: #a9d2e7;
-
-$gradient: linear-gradient(to right bottom, $color-grad-1, $color-grad-2);
-
-//media auery responsive view
-$bp-large: 75em; // 1250px
-$bp-medium: 61.25em; // 980px
-$bp-medium-low: 43.125em; //690px
-$bp-small: 37.5em; // 600px
-$bp-smallest: 31.25em; // 500px
+@import './variables.scss';
 
 * {
   margin: 0;

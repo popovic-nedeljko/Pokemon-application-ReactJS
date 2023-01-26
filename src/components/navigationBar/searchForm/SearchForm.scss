@@ -1,0 +1,77 @@
+@import '../../../sass/variables.scss';
+
+.search {
+  background-color: #fff;
+  box-shadow: 0 0.8rem 5rem 2rem rgba($color-grey-dark-1, 0.015);
+  border-radius: 10rem;
+  display: flex;
+  align-items: center;
+  padding-left: 3rem;
+  transition: all 0.3s;
+
+  @media only screen and (max-width: $bp-large) {
+    padding-left: 5rem;
+  }
+  @media only screen and (max-width: $bp-medium-low) {
+    padding: 0 1rem;
+    border-radius: 0;
+  }
+  @media only screen and (max-width: $bp-small) {
+    order: 1;
+    flex: 0 0 100%;
+    padding: 0;
+  }
+
+  &:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 0.7rem 3rem rgba($color-grey-dark-1, 0.08);
+    @media only screen and (max-width: $bp-small) {
+      transform: translateY(0px) translateX(-3px) scale(1.07);
+      box-shadow: none;
+    }
+  }
+
+  &__field {
+    border: none;
+    background: none;
+    font-family: inherit;
+    color: inherit;
+    font-size: 1.8rem;
+    width: 30rem;
+    position: relative;
+
+    @media only screen and (max-width: $bp-large) {
+      font-size: 1.5rem;
+      width: 26rem;
+    }
+    @media only screen and (max-width: $bp-medium) {
+      width: 22rem;
+    }
+    @media only screen and (max-width: $bp-small) {
+      width: 100%;
+      background-color: $color-grey-light-2;
+      height: 7rem;
+      font-size: 2.7rem;
+      padding-left: 5rem;
+      font-weight: 600;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $color-grey-light-3;
+    }
+  }
+
+  &__btn {
+    font-weight: 600;
+    font-family: inherit;
+
+    @media only screen and (max-width: $bp-small) {
+      position: absolute;
+      right: 2rem;
+    }
+  }
+}

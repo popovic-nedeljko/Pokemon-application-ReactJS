@@ -2,8 +2,6 @@ import React, { useState, useContext, useEffect, useCallback } from 'react';
 import usePokemonData from '../src/hooks/usePokemonData';
 import { useLocation } from 'react-router-dom';
 
-const API = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10';
-
 const AppContext = React.createContext();
 
 const getLocalStorage = () => {
@@ -14,19 +12,22 @@ const getLocalStorage = () => {
 };
 
 const AppProvider = ({ children }) => {
+  const [page, setPage] = useState(1);
+  const API = `https://pokeapi.co/api/v2/pokemon/?offset=${
+    (page - 1) * 10
+  }&limit=10`;
+
   const [loading, setLoading] = useState(false);
+  const [searchPokemon, setSearchPokemon] = useState('');
+  console.log(searchPokemon);
 
   const { pathname } = useLocation();
-  const pokeId = pathname.slice(1);
+  const pokeId = searchPokemon ? searchPokemon : +pathname.slice(1);
   const { pokemonData } = usePokemonData(pokeId);
-  console.log(typeof pokeId);
-  const [searchPokemon, setSearchPokemon] = useState('a');
-  console.log(searchPokemon);
+  console.log(pokemonData);
   const [pokeList, setPokeList] = useState([]);
-
   const [nextUrl, setNextUrl] = useState();
   const [prevUrl, setPrevUrl] = useState();
-  const [page, setPage] = useState(0);
 
   const [catchedPokemons, setCatchedPokemons] = useState(getLocalStorage());
 
@@ -59,7 +60,7 @@ const AppProvider = ({ children }) => {
         });
 
         setPokeList(newPokeList);
-        setPage(Math.ceil(+newPokeList[0].id / 10));
+        // setPage(Math.ceil(+newPokeList[0].id / 10));
       } else {
         setPokeList([]);
       }
@@ -78,13 +79,12 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchPokemons(API);
-  }, [fetchPokemons]);
+  }, [page]);
 
   //Catch pokemons
   const catchPokemon = () => {
     if (pokemonData.id === pokeId) {
       const catchedPokemon = pokemonData;
-
       return setCatchedPokemons([...catchedPokemons, catchedPokemon]);
     } else {
       return;
