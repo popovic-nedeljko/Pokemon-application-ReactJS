@@ -3,7 +3,7 @@
   padding: 2rem 3.5rem;
 
   @media only screen and (max-width: $bp-large) {
-    padding: 2rem 2.8rem;
+    padding: 0rem 2.8rem;
   }
 
   @media only screen and (max-width: $bp-medium-low) {
@@ -21,6 +21,10 @@
     }
     &--next {
       float: right;
+    }
+    &--list {
+      text-align: center;
+      font-size: 2rem;
     }
   }
 }

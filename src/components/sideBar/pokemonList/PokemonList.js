@@ -3,9 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import Loading from '../../loading/Loading';
 import { useGlobalContext } from '../../../context';
 import './PokemonList.scss';
+import { isDisabled } from '@testing-library/user-event/dist/utils';
 
 const PokemonList = () => {
-  const { pokeList, loading, page } = useGlobalContext();
+  const { pokeList, loading, page, pokemonData, isSearched } =
+    useGlobalContext();
+
   const { pathname } = useLocation();
   const id = +pathname.slice(1);
 
@@ -13,7 +16,33 @@ const PokemonList = () => {
     return <Loading />;
   }
 
-  return (
+  return isSearched ? (
+    <div className='search-results'>
+      <ul className='results'>
+        <li className='preview' key={pokemonData.id}>
+          <Link
+            key={pokemonData.id}
+            to={`${pokemonData.id}`}
+            className={`preview__link preview__link--active`}
+          >
+            <figure className='preview__fig'>
+              <img
+                src={
+                  pokemonData.picture
+                    ? pokemonData.picture
+                    : pokemonData.pictureSub
+                }
+                alt='pict'
+              />
+            </figure>
+            <div className='preview__data'>
+              <h4 className='preview__title'>{pokemonData.name}</h4>
+            </div>
+          </Link>
+        </li>
+      </ul>
+    </div>
+  ) : (
     <div className='search-results'>
       <ul className='results'>
         <li className='preview'>
