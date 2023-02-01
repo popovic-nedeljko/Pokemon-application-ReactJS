@@ -7,8 +7,13 @@ import '../ButtonComponents.scss';
 const CatchButton = () => {
   const { pathname } = useLocation();
   const pokeId = +pathname.slice(1);
-  const { catchPokemon, removePokemon, catchedPokemons, setModal } =
-    useGlobalContext();
+  const {
+    catchPokemon,
+    removePokemon,
+    catchedPokemons,
+    setModal,
+    pokemonData,
+  } = useGlobalContext();
 
   return catchedPokemons.some((pokemon) => pokemon.id === pokeId) ? (
     <button
