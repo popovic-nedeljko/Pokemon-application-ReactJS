@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Route, Routes } from 'react-router-dom';
 
 import SinglePokemon from './components/main_pokemon/SinglePokemon';
 import Sidebar from './components/sideBar/Sidebar';
@@ -14,9 +13,6 @@ function App() {
       <Sidebar />
       <SinglePokemon />
       <Popup />
-      {/* <Routes>
-        <Route path='popup' element={<Popup />} />
-      </Routes> */}
     </div>
   );
 }

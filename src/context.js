@@ -19,15 +19,18 @@ const AppProvider = ({ children }) => {
 
   const [loading, setLoading] = useState(false);
   const [searchPokemon, setSearchPokemon] = useState('');
-  console.log(searchPokemon);
+  const [isSearched, setIsSearched] = useState(false);
 
   const { pathname } = useLocation();
-  const pokeId = searchPokemon ? searchPokemon : +pathname.slice(1);
+  const pokeId = searchPokemon
+    ? searchPokemon
+    : +pathname.slice(1) > 0
+    ? +pathname.slice(1)
+    : '';
   const { pokemonData } = usePokemonData(pokeId);
+  console.log(pokeId);
   console.log(pokemonData);
   const [pokeList, setPokeList] = useState([]);
-  const [nextUrl, setNextUrl] = useState();
-  const [prevUrl, setPrevUrl] = useState();
 
   const [catchedPokemons, setCatchedPokemons] = useState(getLocalStorage());
 
@@ -40,9 +43,6 @@ const AppProvider = ({ children }) => {
       const response = await fetch(url);
       const data = await response.json();
       if (!response.ok) throw new Error(`${data.message}(${response.status})`);
-
-      setNextUrl(data.next);
-      setPrevUrl(data.previous);
 
       const dataList = await Promise.all(
         data.results.map((item) => fetchSinglePokemon(item.url))
@@ -79,7 +79,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchPokemons(API);
-  }, [page]);
+  }, [fetchPokemons, page]);
 
   //Catch pokemons
   const catchPokemon = () => {
@@ -106,8 +106,6 @@ const AppProvider = ({ children }) => {
         pokeList,
         setSearchPokemon,
         fetchPokemons,
-        nextUrl,
-        prevUrl,
         page,
         setPage,
         fetchSinglePokemon,
@@ -117,13 +115,15 @@ const AppProvider = ({ children }) => {
         pokemonData,
         setModal,
         modal,
+        isSearched,
+        setIsSearched,
       }}
     >
       {children}
     </AppContext.Provider>
   );
 };
-// make sure use
+
 export const useGlobalContext = () => {
   return useContext(AppContext);
 };
