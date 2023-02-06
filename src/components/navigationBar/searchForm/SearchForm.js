@@ -1,33 +1,31 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useGlobalContext } from '../../../context';
 import { ImSearch } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 import './SearchForm.scss';
-import { useState } from 'react';
 
 const SearchForm = () => {
-  const { searchPokemon, setSearchPokemon, pokemonData } = useGlobalContext();
+  const { searchPokemon, setSearchPokemon, pokemonData, setIsSearched } =
+    useGlobalContext();
 
-  const searchPokeName = (e) => {
-    setSearchPokemon(e.target.value);
-  };
+  const searchValue = useRef(null);
 
-  const handleClick = () => {
-    setSearchPokemon('');
-  };
-
-  const handleSubmit = function (e) {
-    e.preventDefault();
+  const handleClick = (e) => {
+    setIsSearched(true);
+    setSearchPokemon(e.target.value.toLowerCase());
+    searchValue.current.value = '';
+    searchValue.current.blur();
   };
 
   return (
-    <form className='search' onSubmit={handleSubmit}>
+    <form className='search'>
       <input
         className='search__field'
+        ref={searchValue}
         type='text'
         placeholder='Search over 1.000 pokemons...'
         value={searchPokemon}
-        onChange={searchPokeName}
+        onChange={(e) => setSearchPokemon(e.target.value.toLowerCase())}
       />
       <Link to={`${pokemonData && pokemonData.id}`}>
         <button className='btn search__btn' onClick={handleClick}>
