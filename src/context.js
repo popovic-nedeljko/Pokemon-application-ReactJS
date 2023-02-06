@@ -27,8 +27,7 @@ const AppProvider = ({ children }) => {
     : +pathname.slice(1) > 0
     ? +pathname.slice(1)
     : '';
-  const { pokemonData } = usePokemonData(pokeId);
-
+  const { pokemonData, error } = usePokemonData(pokeId);
   const [pokeList, setPokeList] = useState([]);
 
   const [catchedPokemons, setCatchedPokemons] = useState(getLocalStorage());
@@ -64,7 +63,7 @@ const AppProvider = ({ children }) => {
       }
       setLoading(false);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }, []);
 
@@ -116,6 +115,7 @@ const AppProvider = ({ children }) => {
         isSearched,
         setIsSearched,
         pokeId,
+        error,
       }}
     >
       {children}

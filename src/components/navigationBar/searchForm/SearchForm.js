@@ -12,7 +12,7 @@ const SearchForm = () => {
 
   const handleClick = (e) => {
     setIsSearched(true);
-    setSearchPokemon(e.target.value.toLowerCase());
+    setSearchPokemon(e.target.value);
     searchValue.current.value = '';
     searchValue.current.blur();
   };
