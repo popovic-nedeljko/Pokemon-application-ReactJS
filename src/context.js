@@ -28,8 +28,7 @@ const AppProvider = ({ children }) => {
     ? +pathname.slice(1)
     : '';
   const { pokemonData } = usePokemonData(pokeId);
-  console.log(pokeId);
-  console.log(pokemonData);
+
   const [pokeList, setPokeList] = useState([]);
 
   const [catchedPokemons, setCatchedPokemons] = useState(getLocalStorage());
@@ -60,7 +59,6 @@ const AppProvider = ({ children }) => {
         });
 
         setPokeList(newPokeList);
-        // setPage(Math.ceil(+newPokeList[0].id / 10));
       } else {
         setPokeList([]);
       }
@@ -79,7 +77,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchPokemons(API);
-  }, [fetchPokemons, page]);
+  }, [fetchPokemons, page, API]);
 
   //Catch pokemons
   const catchPokemon = () => {
@@ -117,6 +115,7 @@ const AppProvider = ({ children }) => {
         modal,
         isSearched,
         setIsSearched,
+        pokeId,
       }}
     >
       {children}

@@ -4,8 +4,7 @@ import { useGlobalContext } from '../../../context';
 import './Pagination.scss';
 
 const Pagination = () => {
-  const { fetchPokemons, page, setPage, isSearched, setIsSearched } =
-    useGlobalContext();
+  const { page, setPage, isSearched, setIsSearched } = useGlobalContext();
 
   const nextPage = () => {
     setPage(page + 1);
@@ -23,7 +22,7 @@ const Pagination = () => {
         className='btn--inline pagination__btn--list'
         onClick={returnToList}
       >
-        return to List
+        return to list
       </button>
     </div>
   ) : (

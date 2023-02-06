@@ -3,13 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import Loading from '../../loading/Loading';
 import { useGlobalContext } from '../../../context';
 import './PokemonList.scss';
-import { isDisabled } from '@testing-library/user-event/dist/utils';
 
 const PokemonList = () => {
-  const { pokeList, loading, page, pokemonData, isSearched } =
-    useGlobalContext();
+  const { pokeList, loading, pokemonData, isSearched } = useGlobalContext();
 
-  const { pathname } = useLocation();
+  let { pathname } = useLocation();
   const id = +pathname.slice(1);
 
   if (loading) {

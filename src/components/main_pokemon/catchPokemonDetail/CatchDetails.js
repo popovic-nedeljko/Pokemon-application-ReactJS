@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { CgPokemon } from 'react-icons/cg';
 import { useGlobalContext } from '../../../context';
 import './/CatchDetails.scss';
@@ -21,5 +21,3 @@ const CatchDetails = () => {
 };
 
 export default CatchDetails;
-
-// ${this._data.yourPokemons.length}

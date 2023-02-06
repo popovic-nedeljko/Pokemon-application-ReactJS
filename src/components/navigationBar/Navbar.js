@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Route, Routes } from 'react-router-dom';
 import logo from '../../img/International_Pokémon_logo.svg.png';
 import SearchForm from './searchForm/SearchForm';
 import YourPokemon from './storePokemons/YourPokemons';
