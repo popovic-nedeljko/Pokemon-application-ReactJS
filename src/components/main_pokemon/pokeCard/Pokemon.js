@@ -4,7 +4,7 @@ import PokemonCard from './PokemonCard';
 import { useGlobalContext } from '../../../context';
 
 const Pokemon = () => {
-  const { loading, error, pokemonData } = useGlobalContext();
+  const { loading, pokemonData } = useGlobalContext();
 
   if (loading) {
     return <Loading />;

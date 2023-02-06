@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Error.scss';
 
 const Error = () => {
   return (
-    <div>
-      <h2>error page</h2>
+    <div className='error'>
+      <p>Please insert correct pokemon name...</p>
     </div>
   );
 };

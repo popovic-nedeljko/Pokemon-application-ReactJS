@@ -6,14 +6,16 @@ const usePokemonData = (id) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [pokemonData, setPokemonData] = useState(null);
-  const [pokemonId, setPokemonId] = useState();
 
   useEffect(() => {
     async function getPokemonData() {
       try {
         setLoading(true);
+
         const response = await fetch(`${url}${id}`);
         const data = await response.json();
+        if (!response.ok)
+          throw new Error(`${data.message}(${response.status})`);
 
         if (data) {
           const newPokemon = {
@@ -30,7 +32,7 @@ const usePokemonData = (id) => {
             abilities: data.abilities.map((ab) => ab.ability.name).join(' ** '),
             pageNumber: Math.ceil(+data.id / 10),
           };
-          setPokemonId(+data.id);
+
           setPokemonData(newPokemon);
         } else {
           setPokemonData(null);
@@ -38,7 +40,8 @@ const usePokemonData = (id) => {
         }
         setLoading(false);
       } catch (err) {
-        console.log(err);
+        // console.error(err);
+        setPokemonData(null);
         setError(err);
         setLoading(false);
       }
@@ -46,7 +49,7 @@ const usePokemonData = (id) => {
     getPokemonData();
   }, [id]);
 
-  return { loading, error, pokemonData, pokemonId };
+  return { loading, error, pokemonData };
 };
 
 export default usePokemonData;

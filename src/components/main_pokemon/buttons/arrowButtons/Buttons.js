@@ -15,9 +15,6 @@ const ButtonsNextPrev = () => {
   const { page, setPage, isSearched, pokemonData } = useGlobalContext();
   const pageNum = Math.ceil(id / 10);
 
-  console.log(page);
-  console.log(pageNum);
-
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === 'ArrowLeft') {
