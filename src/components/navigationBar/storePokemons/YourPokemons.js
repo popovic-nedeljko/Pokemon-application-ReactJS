@@ -8,7 +8,7 @@ import './YourPokemons.scss';
 const YourPokemon = () => {
   const { pathname } = useLocation();
   const id = +pathname.slice(1);
-  const { catchedPokemons } = useGlobalContext();
+  const { catchedPokemons, setPage } = useGlobalContext();
 
   return (
     <div className='nav'>
@@ -27,6 +27,9 @@ const YourPokemon = () => {
                       <li key={pokemon.id} className='preview'>
                         <Link
                           to={`${pokemon.id}`}
+                          onClick={() => {
+                            setPage(Math.ceil(pokemon.id / 10));
+                          }}
                           className={
                             pokemon.id === id
                               ? 'preview__link preview__link--active'
