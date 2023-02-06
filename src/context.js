@@ -29,7 +29,7 @@ const AppProvider = ({ children }) => {
     : '';
   const { pokemonData, error } = usePokemonData(pokeId);
   const [pokeList, setPokeList] = useState([]);
-
+  console.log(pokeList);
   const [catchedPokemons, setCatchedPokemons] = useState(getLocalStorage());
 
   const [modal, setModal] = useState(false);
@@ -76,7 +76,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchPokemons(API);
-  }, [fetchPokemons, page, API]);
+  }, [fetchPokemons, page]);
 
   //Catch pokemons
   const catchPokemon = () => {
