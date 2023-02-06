@@ -22,7 +22,7 @@ const Popup = () => {
             alt='Logo'
             className='add-pokemon-window--message_logo'
           />
-          <p className='add-pokemon-window--message'>
+          <h2 className='add-pokemon-window--message'>
             Congradulations ! ! ! <br /> You have caught
             <p
               className='add-pokemon-window--message--pokename'
@@ -33,7 +33,7 @@ const Popup = () => {
               <CgPokemon />
             </p>
             Check 'your pokemons'
-          </p>
+          </h2>
         </div>
       </>
     );
