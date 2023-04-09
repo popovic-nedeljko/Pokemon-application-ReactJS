@@ -4,7 +4,7 @@
 
 Pokemon application where you can search over 1000 pokemons. Find and store(catch) your favorite pokemons.
 
-<img src='/src/img/pokemon_app_react.png' width=500 height=400> <img src='/src/img/pokemon-phone-react.png' width=250 height=400>
+<img src='/src/img/pokemon_app_react.png' width=500 height=400> <img src='/src/img/pokemon-phone-react.png' width=300 height=400>
 
 In this project pokemon API was used to retrieve data and help structure application in which you can browse trough your favourite pokemons, see more details about them and store your favorite ones.
 
