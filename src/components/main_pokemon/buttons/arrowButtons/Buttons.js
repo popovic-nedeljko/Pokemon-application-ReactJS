@@ -12,35 +12,22 @@ const ButtonsNextPrev = () => {
   const { pathname } = useLocation();
   const id = +pathname.slice(1);
   let navigate = useNavigate();
-  const { page, setPage, isSearched, pokemonData } = useGlobalContext();
-  const pageNum = Math.ceil(id / 10);
-  // console.log(id);
-  // console.log(pageNum);
-  // console.log(pageNum === +page);
+  const { isSearched, pokemonData } = useGlobalContext();
 
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === 'ArrowLeft') {
-        if (pageNum === +page) {
-          navigate(`${+id - 1}`);
-        } else {
-          setPage(pageNum);
-          navigate(`${+id - 1}`);
-        }
+        if (+id > 1) navigate(`${+id - 1}`);
       } else if (e.key === 'ArrowRight') {
-        if (pageNum === +page) {
-          navigate(`${+id + 1}`);
-        } else {
-          setPage(pageNum);
-          navigate(`${+id + 1}`);
-        }
+        navigate(`${+id + 1}`);
       }
     };
+
     document.addEventListener('keydown', handleKeyPress);
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [page, pageNum, id, navigate, setPage]);
+  }, [id]);
 
   return (
     <div className='pokemon__info-buttons'>
@@ -48,9 +35,6 @@ const ButtonsNextPrev = () => {
         disabled={(isSearched && true) || (+id > 1 ? false : true)}
         onClick={() => {
           navigate(`${+id - 1}`);
-          if (pageNum !== +page) {
-            setPage(pageNum);
-          }
         }}
         className='btn--next--prev btn--prev'
       >
@@ -61,9 +45,6 @@ const ButtonsNextPrev = () => {
         disabled={(isSearched && true) || (!pokemonData && true)}
         onClick={() => {
           navigate(`${+id + 1}`);
-          if (pageNum !== +page) {
-            setPage(pageNum);
-          }
         }}
         className='btn--next--prev btn--next'
       >

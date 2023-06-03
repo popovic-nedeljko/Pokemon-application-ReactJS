@@ -76,6 +76,13 @@ const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    if (page !== Math.ceil(pokeId / 10)) {
+      console.log('we ar ehere');
+      setPage(Math.ceil(pokeId / 10));
+    }
+  }, [pokeId]);
+
+  useEffect(() => {
     fetchPokemons(API);
   }, [fetchPokemons, page]);
 
