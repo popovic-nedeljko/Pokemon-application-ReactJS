@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import './SearchForm.scss';
 
 const SearchForm = () => {
-  const { searchPokemon, setSearchPokemon, pokemonData, setIsSearched } =
-    useGlobalContext();
+  const { setSearchPokemon, pokemonData, setIsSearched } = useGlobalContext();
 
-  const searchValue = useRef(null);
+  const searchValue = useRef();
 
   const handleClick = (e) => {
+    e.preventDefault();
     setIsSearched(true);
-    setSearchPokemon(e.target.value);
+    setSearchPokemon(searchValue.current.value);
     searchValue.current.value = '';
     searchValue.current.blur();
   };
@@ -24,8 +24,6 @@ const SearchForm = () => {
         ref={searchValue}
         type='text'
         placeholder='Search over 1.000 pokemons...'
-        value={searchPokemon}
-        onChange={(e) => setSearchPokemon(e.target.value.toLowerCase())}
       />
       <Link to={`${pokemonData && pokemonData.id}`}>
         <button className='btn search__btn' onClick={handleClick}>

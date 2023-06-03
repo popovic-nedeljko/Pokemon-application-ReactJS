@@ -8,7 +8,7 @@ import './YourPokemons.scss';
 const YourPokemon = () => {
   const { pathname } = useLocation();
   const id = +pathname.slice(1);
-  const { catchedPokemons, setPage } = useGlobalContext();
+  const { catchedPokemons, setPage, setIsSearched } = useGlobalContext();
 
   return (
     <div className='nav'>
@@ -28,6 +28,7 @@ const YourPokemon = () => {
                         <Link
                           to={`${pokemon.id}`}
                           onClick={() => {
+                            setIsSearched(false);
                             setPage(Math.ceil(pokemon.id / 10));
                           }}
                           className={
