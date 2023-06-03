@@ -29,7 +29,7 @@ const AppProvider = ({ children }) => {
       ? +pathname.slice(1)
       : '';
 
-  const { pokemonData, error } = usePokemonData(pokeId);
+  const { pokemonData, error } = usePokemonData(pokeId, loading, setLoading);
   const [pokeList, setPokeList] = useState([]);
 
   const [catchedPokemons, setCatchedPokemons] = useState(getLocalStorage());
@@ -62,7 +62,6 @@ const AppProvider = ({ children }) => {
       } else {
         setPokeList([]);
       }
-      setLoading(false);
     } catch (err) {
       console.error(err);
     }

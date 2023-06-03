@@ -1,7 +1,22 @@
 @import '../../sass/variables.scss';
 .spinner {
-  margin: 5rem auto;
+  height: 60rem;
+  width: 65%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+
+  @media only screen and (max-width: $bp-large) {
+    height: 55rem;
+  }
+  @media only screen and (max-width: $bp-small) {
+    height: 60rem;
+  }
+  @media only screen and (max-width: $bp-medium-low) {
+    width: 80%;
+  }
 
   svg {
     height: 6rem;

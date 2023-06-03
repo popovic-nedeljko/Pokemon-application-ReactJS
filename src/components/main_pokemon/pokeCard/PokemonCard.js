@@ -3,6 +3,7 @@ import colorTypes from '../../../constants/colorTypes';
 import { useGlobalContext } from '../../../context';
 import PokemonStatsTemplate from './PokemonStatsTemplate';
 import './Card.scss';
+import Loading from '../../loading/Loading';
 
 const PokemonCard = ({
   id,
@@ -17,7 +18,7 @@ const PokemonCard = ({
   type,
   abilities,
 }) => {
-  const { catchedPokemons } = useGlobalContext();
+  const { catchedPokemons, loading } = useGlobalContext();
 
   return (
     <div className='card '>

@@ -10,10 +10,6 @@ const PokemonList = () => {
   let { pathname } = useLocation();
   const id = +pathname.slice(1);
 
-  if (loading) {
-    return <Loading />;
-  }
-
   return isSearched ? (
     <SearchedPokemon />
   ) : (

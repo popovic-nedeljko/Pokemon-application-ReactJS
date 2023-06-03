@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 const url = `https://pokeapi.co/api/v2/pokemon/`;
 
-const usePokemonData = (id) => {
-  const [loading, setLoading] = useState(false);
+const usePokemonData = (id, loading, setLoading) => {
+  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [pokemonData, setPokemonData] = useState(null);
 
