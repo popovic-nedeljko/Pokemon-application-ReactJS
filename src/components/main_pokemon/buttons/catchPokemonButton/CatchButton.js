@@ -1,16 +1,15 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import { useGlobalContext } from '../../../../context';
 import { MdCatchingPokemon } from 'react-icons/md';
 import '../ButtonComponents.scss';
 
 const CatchButton = () => {
-  const { pathname } = useLocation();
-  const pokeId = +pathname.slice(1);
-  const { catchPokemon, removePokemon, catchedPokemons, setModal } =
+  const { catchPokemon, removePokemon, catchedPokemons, setModal, pokeId } =
     useGlobalContext();
 
-  return catchedPokemons.some((pokemon) => pokemon.id === pokeId) ? (
+  return catchedPokemons.some(
+    (pokemon) => pokemon.id === pokeId || pokemon.name === pokeId
+  ) ? (
     <button
       onClick={removePokemon}
       className='btn--ellipse btn--catch_pokemon btn--ellipse--animated'

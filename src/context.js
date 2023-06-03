@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useContext,
-  useEffect,
-  useCallback,
-  useRef,
-} from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import usePokemonData from '../src/hooks/usePokemonData';
 import { useLocation } from 'react-router-dom';
 
@@ -19,7 +13,6 @@ const getLocalStorage = () => {
 
 const AppProvider = ({ children }) => {
   const [page, setPage] = useState(1);
-  console.log(page);
   const API = `https://pokeapi.co/api/v2/pokemon/?offset=${
     (page - 1) * 10
   }&limit=10`;
@@ -29,11 +22,12 @@ const AppProvider = ({ children }) => {
   const [isSearched, setIsSearched] = useState(false);
 
   const { pathname } = useLocation();
-  const pokeId = searchPokemon
-    ? searchPokemon
-    : +pathname.slice(1) > 0
-    ? +pathname.slice(1)
-    : '';
+  const pokeId =
+    isSearched && searchPokemon
+      ? searchPokemon
+      : +pathname.slice(1) > 0
+      ? +pathname.slice(1)
+      : '';
 
   const { pokemonData, error } = usePokemonData(pokeId);
   const [pokeList, setPokeList] = useState([]);
@@ -87,16 +81,26 @@ const AppProvider = ({ children }) => {
 
   //Catch pokemons
   const catchPokemon = () => {
-    if (pokemonData.id === pokeId) {
+    if (pokemonData.id === pokeId || pokemonData.name === pokeId) {
       const catchedPokemon = pokemonData;
       return setCatchedPokemons([...catchedPokemons, catchedPokemon]);
     } else {
       return;
     }
   };
-
+  //relese pokemons
   const removePokemon = () => {
-    setCatchedPokemons(catchedPokemons.filter((item) => item.id !== pokeId));
+    const removed = catchedPokemons.find(
+      (item) => item.name === pokeId || item.id === pokeId
+    );
+
+    if (removed) {
+      const updatedPokemons = catchedPokemons.filter(
+        (item) => item.id !== removed.id
+      );
+
+      setCatchedPokemons(updatedPokemons);
+    }
   };
 
   useEffect(() => {

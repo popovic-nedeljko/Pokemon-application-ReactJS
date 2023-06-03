@@ -7,7 +7,6 @@ import './PokemonList.scss';
 
 const PokemonList = () => {
   const { pokeList, loading, isSearched } = useGlobalContext();
-
   let { pathname } = useLocation();
   const id = +pathname.slice(1);
 

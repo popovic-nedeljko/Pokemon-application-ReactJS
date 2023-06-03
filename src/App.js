@@ -1,5 +1,4 @@
 import React from 'react';
-
 import SinglePokemon from './components/main_pokemon/SinglePokemon';
 import Sidebar from './components/sideBar/Sidebar';
 import Navbar from './components/navigationBar/Navbar';

@@ -184,6 +184,12 @@
     transition: all 0.4s;
   }
 
+  &:disabled {
+    transform: none;
+    opacity: 0.4;
+    box-shadow: none;
+  }
+
   svg {
     height: 2.5rem;
     width: 2.5rem;

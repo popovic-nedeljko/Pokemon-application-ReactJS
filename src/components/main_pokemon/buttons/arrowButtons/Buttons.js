@@ -14,6 +14,9 @@ const ButtonsNextPrev = () => {
   let navigate = useNavigate();
   const { page, setPage, isSearched, pokemonData } = useGlobalContext();
   const pageNum = Math.ceil(id / 10);
+  // console.log(id);
+  // console.log(pageNum);
+  // console.log(pageNum === +page);
 
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -37,18 +40,16 @@ const ButtonsNextPrev = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [page, id]);
+  }, [page, pageNum, id, navigate, setPage]);
 
   return (
     <div className='pokemon__info-buttons'>
       <button
         disabled={(isSearched && true) || (+id > 1 ? false : true)}
         onClick={() => {
-          if (pageNum === +page) {
-            navigate(`${+id - 1}`);
-          } else {
+          navigate(`${+id - 1}`);
+          if (pageNum !== +page) {
             setPage(pageNum);
-            navigate(`${+id - 1}`);
           }
         }}
         className='btn--next--prev btn--prev'
@@ -59,11 +60,9 @@ const ButtonsNextPrev = () => {
       <button
         disabled={(isSearched && true) || (!pokemonData && true)}
         onClick={() => {
-          if (pageNum === +page) {
-            navigate(`${+id + 1}`);
-          } else {
+          navigate(`${+id + 1}`);
+          if (pageNum !== +page) {
             setPage(pageNum);
-            navigate(`${+id + 1}`);
           }
         }}
         className='btn--next--prev btn--next'
