@@ -37,3 +37,7 @@ npm install -g
 3. Explore your fav pokemons
 
 `Have fun! 🃏`
+
+# ***NOTE**** 
+node version: 16.15.0
+npm version: 8.5.5
