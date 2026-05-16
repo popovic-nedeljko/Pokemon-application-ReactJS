@@ -79,11 +79,11 @@ const AppProvider = ({ children }) => {
     if (numericId > 0 && page !== Math.ceil(numericId / PAGE_SIZE)) {
       setPage(Math.ceil(numericId / PAGE_SIZE));
     }
-  }, [pokeId]);
+  }, [pokeId, page]);
 
   useEffect(() => {
     fetchPokemons(API);
-  }, [fetchPokemons, page]);
+  }, [fetchPokemons, API]);
 
   const catchPokemon = () => {
     if (!pokemonData) return;
