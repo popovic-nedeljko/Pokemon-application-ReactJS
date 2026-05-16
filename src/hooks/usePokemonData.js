@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
+import { PAGE_SIZE } from '../context';
 
 const url = `https://pokeapi.co/api/v2/pokemon/`;
 
-const usePokemonData = (id, loading, setLoading) => {
-  // const [loading, setLoading] = useState(false);
+const usePokemonData = (id) => {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [pokemonData, setPokemonData] = useState(null);
 
@@ -24,13 +25,13 @@ const usePokemonData = (id, loading, setLoading) => {
             height: data.height,
             picture: data.sprites.other['official-artwork'].front_default,
             pictureSub: data.sprites.other.dream_world.front_default,
-            health: data.stats[0].base_stat,
-            attack: data.stats[1].base_stat,
-            defense: data.stats[2].base_stat,
-            speed: data.stats[5].base_stat,
+            health: data.stats.find((s) => s.stat.name === 'hp')?.base_stat,
+            attack: data.stats.find((s) => s.stat.name === 'attack')?.base_stat,
+            defense: data.stats.find((s) => s.stat.name === 'defense')?.base_stat,
+            speed: data.stats.find((s) => s.stat.name === 'speed')?.base_stat,
             type: data.types.map((item) => item.type.name),
             abilities: data.abilities.map((ab) => ab.ability.name).join(' ** '),
-            pageNumber: Math.ceil(+data.id / 10),
+            pageNumber: Math.ceil(+data.id / PAGE_SIZE),
           };
 
           setPokemonData(newPokemon);
@@ -40,7 +41,6 @@ const usePokemonData = (id, loading, setLoading) => {
         }
         setLoading(false);
       } catch (err) {
-        // console.error(err);
         setPokemonData(null);
         setError(err);
         setLoading(false);

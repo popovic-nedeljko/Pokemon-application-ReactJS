@@ -8,6 +8,8 @@ import './Popup.scss';
 const Popup = () => {
   const { pokemonData, modal } = useGlobalContext();
 
+  if (!pokemonData) return null;
+
   if (pokemonData)
     return (
       <>
@@ -23,7 +25,7 @@ const Popup = () => {
             className='add-pokemon-window--message_logo'
           />
           <h2 className='add-pokemon-window--message'>
-            Congradulations ! ! ! <br /> You have caught
+            Congratulations ! ! ! <br /> You have caught
             <p
               className='add-pokemon-window--message--pokename'
               style={{ color: colorTypes[pokemonData.type[0]] }}

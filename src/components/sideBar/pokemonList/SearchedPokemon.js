@@ -8,13 +8,13 @@ const SearchedPokemon = () => {
   const { pokemonData, error } = useGlobalContext();
 
   if (error && pokemonData === null) return <Error />;
+  if (!pokemonData) return null;
 
   return (
     <div className='search-results'>
       <ul className='results'>
-        <li className='preview' key={pokemonData.id}>
+        <li className='preview'>
           <Link
-            key={pokemonData.id}
             to={`${pokemonData.id}`}
             className={`preview__link preview__link--active`}
           >
@@ -25,7 +25,7 @@ const SearchedPokemon = () => {
                     ? pokemonData.picture
                     : pokemonData.pictureSub
                 }
-                alt='pict'
+                alt={pokemonData.name}
               />
             </figure>
             <div className='preview__data'>

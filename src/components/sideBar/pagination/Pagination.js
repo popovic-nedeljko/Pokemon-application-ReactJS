@@ -4,67 +4,40 @@ import { useGlobalContext } from '../../../context';
 import './Pagination.scss';
 
 const Pagination = () => {
-  const { page, setPage, isSearched, setIsSearched } = useGlobalContext();
+  const { page, setPage, isSearched, setIsSearched, totalPages } = useGlobalContext();
 
-  const nextPage = () => {
-    setPage(page + 1);
-  };
-  const prevPage = () => {
-    setPage(page - 1);
-  };
-  const returnToList = () => {
-    setIsSearched(false);
-  };
+  const nextPage = () => setPage(page + 1);
+  const prevPage = () => setPage(page - 1);
+  const returnToList = () => setIsSearched(false);
 
-  return isSearched ? (
-    <div className='pagition'>
-      <button
-        className='btn--inline pagination__btn--list'
-        onClick={returnToList}
-      >
-        return to list
-      </button>
-    </div>
-  ) : (
-    (page === 1027 && (
+  if (isSearched) {
+    return (
       <div className='pagination'>
-        <button
-          className='btn--inline pagination__btn--prev'
-          onClick={prevPage}
-        >
+        <button className='btn--inline pagination__btn--list' onClick={returnToList}>
+          return to list
+        </button>
+      </div>
+    );
+  }
+
+  const isFirst = page === 1;
+  const isLast = totalPages > 0 && page === totalPages;
+
+  return (
+    <div className='pagination'>
+      {!isFirst && (
+        <button className='btn--inline pagination__btn--prev' onClick={prevPage}>
           <RxThickArrowLeft />
           <span>{`Page ${page - 1}`}</span>
         </button>
-      </div>
-    )) ||
-      (page === 1 ? (
-        <div className='pagination'>
-          <button
-            className='btn--inline pagination__btn--next'
-            onClick={nextPage}
-          >
-            <span>{`Page ${page + 1}`}</span>
-            <RxThickArrowRight />
-          </button>
-        </div>
-      ) : (
-        <div className='pagination'>
-          <button
-            className='btn--inline pagination__btn--next'
-            onClick={nextPage}
-          >
-            <span>{`Page ${page + 1}`}</span>
-            <RxThickArrowRight />
-          </button>
-          <button
-            className='btn--inline pagination__btn--prev'
-            onClick={prevPage}
-          >
-            <RxThickArrowLeft />
-            <span>{`Page ${page - 1}`}</span>
-          </button>
-        </div>
-      ))
+      )}
+      {!isLast && (
+        <button className='btn--inline pagination__btn--next' onClick={nextPage}>
+          <span>{`Page ${page + 1}`}</span>
+          <RxThickArrowRight />
+        </button>
+      )}
+    </div>
   );
 };
 

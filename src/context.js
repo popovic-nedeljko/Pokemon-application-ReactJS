@@ -1,24 +1,30 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react';
-import usePokemonData from '../src/hooks/usePokemonData';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useContext, useEffect, useCallback } from "react";
+import usePokemonData from "./hooks/usePokemonData";
+import { useLocation } from "react-router-dom";
 
 const AppContext = React.createContext();
 
+export const PAGE_SIZE = 10;
+
 const getLocalStorage = () => {
-  let pokemons = localStorage.getItem('pokemons');
-  return pokemons
-    ? (pokemons = JSON.parse(localStorage.getItem('pokemons')))
-    : [];
+  const pokemons = localStorage.getItem("pokemons");
+  return pokemons ? JSON.parse(pokemons) : [];
+};
+
+const fetchSinglePokemon = async (api) => {
+  const response = await fetch(api);
+  const data = await response.json();
+  return data;
 };
 
 const AppProvider = ({ children }) => {
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const API = `https://pokeapi.co/api/v2/pokemon/?offset=${
-    (page - 1) * 10
-  }&limit=10`;
+    (page - 1) * PAGE_SIZE
+  }&limit=${PAGE_SIZE}`;
 
-  const [loading, setLoading] = useState(false);
-  const [searchPokemon, setSearchPokemon] = useState('');
+  const [searchPokemon, setSearchPokemon] = useState("");
   const [isSearched, setIsSearched] = useState(false);
 
   const { pathname } = useLocation();
@@ -26,25 +32,26 @@ const AppProvider = ({ children }) => {
     isSearched && searchPokemon
       ? searchPokemon
       : +pathname.slice(1) > 0
-      ? +pathname.slice(1)
-      : '';
+        ? +pathname.slice(1)
+        : "";
 
-  const { pokemonData, error } = usePokemonData(pokeId, loading, setLoading);
+  const { pokemonData, error, loading } = usePokemonData(pokeId);
   const [pokeList, setPokeList] = useState([]);
 
   const [catchedPokemons, setCatchedPokemons] = useState(getLocalStorage());
 
   const [modal, setModal] = useState(false);
 
-  //fetch pokemonList
   const fetchPokemons = useCallback(async (url) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
       if (!response.ok) throw new Error(`${data.message}(${response.status})`);
 
+      setTotalPages(Math.ceil(data.count / PAGE_SIZE));
+
       const dataList = await Promise.all(
-        data.results.map((item) => fetchSinglePokemon(item.url))
+        data.results.map((item) => fetchSinglePokemon(item.url)),
       );
 
       if (dataList) {
@@ -52,9 +59,9 @@ const AppProvider = ({ children }) => {
           return {
             id: item.id,
             name: item.name,
-            picture: item.sprites.other['official-artwork'].front_default,
+            picture: item.sprites.other["official-artwork"].front_default,
             pictureSub: item.sprites.other.dream_world.front_default,
-            type: item.types.map((type) => type.type.name).join(' '),
+            type: item.types.map((type) => type.type.name).join(" "),
           };
         });
 
@@ -67,17 +74,10 @@ const AppProvider = ({ children }) => {
     }
   }, []);
 
-  const fetchSinglePokemon = async (api) => {
-    const response = await fetch(api);
-    const data = await response.json();
-
-    return data;
-  };
-
   useEffect(() => {
-    if (page !== Math.ceil(pokeId / 10)) {
-      console.log('we ar ehere');
-      setPage(Math.ceil(pokeId / 10));
+    const numericId = +pokeId;
+    if (numericId > 0 && page !== Math.ceil(numericId / PAGE_SIZE)) {
+      setPage(Math.ceil(numericId / PAGE_SIZE));
     }
   }, [pokeId]);
 
@@ -85,32 +85,27 @@ const AppProvider = ({ children }) => {
     fetchPokemons(API);
   }, [fetchPokemons, page]);
 
-  //Catch pokemons
   const catchPokemon = () => {
+    if (!pokemonData) return;
     if (pokemonData.id === pokeId || pokemonData.name === pokeId) {
-      const catchedPokemon = pokemonData;
-      return setCatchedPokemons([...catchedPokemons, catchedPokemon]);
-    } else {
-      return;
+      setCatchedPokemons((prev) => [...prev, pokemonData]);
     }
   };
-  //relese pokemons
+
   const removePokemon = () => {
     const removed = catchedPokemons.find(
-      (item) => item.name === pokeId || item.id === pokeId
+      (item) => item.name === pokeId || item.id === pokeId,
     );
 
     if (removed) {
-      const updatedPokemons = catchedPokemons.filter(
-        (item) => item.id !== removed.id
+      setCatchedPokemons((prev) =>
+        prev.filter((item) => item.id !== removed.id),
       );
-
-      setCatchedPokemons(updatedPokemons);
     }
   };
 
   useEffect(() => {
-    localStorage.setItem('pokemons', JSON.stringify(catchedPokemons));
+    localStorage.setItem("pokemons", JSON.stringify(catchedPokemons));
   }, [catchedPokemons]);
 
   return (
@@ -122,7 +117,7 @@ const AppProvider = ({ children }) => {
         fetchPokemons,
         page,
         setPage,
-        fetchSinglePokemon,
+        totalPages,
         catchedPokemons,
         removePokemon,
         catchPokemon,

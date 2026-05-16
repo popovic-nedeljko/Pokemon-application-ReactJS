@@ -2,7 +2,7 @@ import React from 'react';
 import { RiSave3Line } from 'react-icons/ri';
 import { BsExclamationTriangle } from 'react-icons/bs';
 import { Link, useLocation } from 'react-router-dom';
-import { useGlobalContext } from '../../../context';
+import { useGlobalContext, PAGE_SIZE } from '../../../context';
 import './YourPokemons.scss';
 
 const YourPokemon = () => {
@@ -13,7 +13,7 @@ const YourPokemon = () => {
   return (
     <div className='nav'>
       <ul className='nav__list'>
-        <li key={catchedPokemons.id} className='nav__item'>
+        <li className='nav__item'>
           <button className='nav__btn nav__btn--yourPokemon'>
             <RiSave3Line />
             <span>Your pokemons</span>
@@ -23,13 +23,12 @@ const YourPokemon = () => {
               {catchedPokemons.length > 0 ? (
                 catchedPokemons.map((pokemon) => {
                   return (
-                    <>
-                      <li key={pokemon.id} className='preview'>
+                    <li key={pokemon.id} className='preview'>
                         <Link
                           to={`${pokemon.id}`}
                           onClick={() => {
                             setIsSearched(false);
-                            setPage(Math.ceil(pokemon.id / 10));
+                            setPage(Math.ceil(pokemon.id / PAGE_SIZE));
                           }}
                           className={
                             pokemon.id === id
@@ -47,7 +46,6 @@ const YourPokemon = () => {
                           </div>
                         </Link>
                       </li>
-                    </>
                   );
                 })
               ) : (

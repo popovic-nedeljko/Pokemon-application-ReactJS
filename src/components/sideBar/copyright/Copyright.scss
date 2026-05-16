@@ -1,13 +1,11 @@
-@import '../../../sass/variables.scss';
+@import "../../../sass/variables.scss";
 
 .copyright {
-  position: absolute;
   bottom: 1rem;
   text-align: center;
   color: $color-grey-dark-2;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   padding: 0 3.5rem;
-  margin-top: 4rem;
 
   .ln-link:link,
   .ln-link:visited {

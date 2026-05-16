@@ -1,8 +1,7 @@
-@import '../../../sass/variables.scss';
+@import "../../../sass/variables.scss";
 
 .results {
   list-style: none;
-  margin-bottom: 2rem;
 }
 
 .preview {
@@ -11,14 +10,11 @@
     &:visited {
       display: flex;
       align-items: center;
-      padding: 1.1rem 0rem;
+      padding: 0.5rem 0rem;
       transition: all ease-in 0.3s;
       text-decoration: none;
       width: 100%;
       animation: flipNMoveRight 0.7s ease-in-out 0.5s backwards;
-
-      //topdown animation for pokelist (altenative animation)
-      // animation: flipNMoveTop 0.6s ease-in-out 0.75s;
     }
     &:hover {
       background-color: $color-grey-light-1;
@@ -41,7 +37,7 @@
   &__fig {
     flex: 0 0 30%;
     overflow: hidden;
-    height: 5rem;
+    height: 4.5rem;
     margin-left: 2.5rem;
     position: relative;
     backface-visibility: hidden;
@@ -78,8 +74,8 @@
   }
 
   &__title {
-    font-size: 2rem;
-    letter-spacing: 2px;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
     color: $color-black;
     text-transform: uppercase;
     font-weight: 600;

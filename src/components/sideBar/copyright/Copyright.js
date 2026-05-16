@@ -1,7 +1,7 @@
 import React from 'react';
 import './Copyright.scss';
 
-const Sidebar = () => {
+const Copyright = () => {
   return (
     <div className='copyright'>
       <p>
@@ -14,11 +14,11 @@ const Sidebar = () => {
         >
           Nedeljko Popovic
         </a>
-        . Welcome to PokemonApp. Have a nice time broworsing for your favorite
+        . Welcome to PokemonApp. Have a nice time browsing for your favorite
         pokemons.
       </p>
     </div>
   );
 };
 
-export default Sidebar;
+export default Copyright;

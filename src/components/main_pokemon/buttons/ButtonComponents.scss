@@ -63,12 +63,12 @@
 
     text-transform: uppercase;
     text-decoration: none;
-    padding: 1.5rem 5rem;
+    padding: 1rem 3rem;
     display: inline-block;
     border-radius: 10rem;
     transition: all 0.2s;
     position: relative;
-    font-size: 1rem;
+    font-size: 0.85rem;
     border: none;
     cursor: pointer;
     color: $color-black;
@@ -85,9 +85,9 @@
       font-weight: 700;
     }
     @media only screen and (max-width: $bp-small) {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 500;
-      padding: 2rem 10rem;
+      padding: 1.5rem 7rem;
     }
 
     &::after {
@@ -136,15 +136,15 @@
   }
 
   svg {
-    height: 2.5rem;
-    width: 2.5rem;
-    margin-top: 0.5rem;
+    height: 1.8rem;
+    width: 1.8rem;
+    margin-top: 0.4rem;
     fill: $color-white;
 
     @media only screen and (max-width: $bp-small) {
-      height: 4rem;
-      width: 4rem;
-      margin-top: 1rem;
+      height: 3rem;
+      width: 3rem;
+      margin-top: 0.7rem;
     }
   }
 }
@@ -154,17 +154,17 @@
   background: none;
   cursor: pointer;
 
-  margin: 0 2rem;
+  margin: 0 1rem;
 
   svg {
-    height: 8rem;
-    width: 8rem;
+    height: 5rem;
+    width: 5rem;
     fill: $color-primary;
     transition: all 0.3s;
 
     @media only screen and (max-width: $bp-small) {
-      height: 12rem;
-      width: 12rem;
+      height: 8rem;
+      width: 8rem;
     }
   }
 

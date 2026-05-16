@@ -1,4 +1,4 @@
-@import '../../sass/variables.scss';
+@import "../../sass/variables.scss";
 .header {
   grid-area: head;
   background-color: $color-white;
@@ -16,8 +16,8 @@
   }
 
   &__logo {
-    padding: 0rem 2rem;
-    height: 7rem;
+    padding: 2rem 2rem;
+    height: 10rem;
     display: block;
     transition: all 0.2s;
     &:hover {

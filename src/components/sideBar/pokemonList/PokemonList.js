@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Loading from '../../loading/Loading';
 import { useGlobalContext } from '../../../context';
 import SearchedPokemon from './SearchedPokemon';
 import './PokemonList.scss';
 
 const PokemonList = () => {
-  const { pokeList, loading, isSearched } = useGlobalContext();
+  const { pokeList, isSearched } = useGlobalContext();
   let { pathname } = useLocation();
   const id = +pathname.slice(1);
 
@@ -15,11 +14,10 @@ const PokemonList = () => {
   ) : (
     <div className='search-results'>
       <ul className='results'>
-        <li className='preview'>
-          {pokeList.map((item) => {
-            return (
+        {pokeList.map((item) => {
+          return (
+            <li key={item.id} className='preview'>
               <Link
-                key={item.id}
                 to={`${item.id}`}
                 className={
                   item.id === id
@@ -30,16 +28,16 @@ const PokemonList = () => {
                 <figure className='preview__fig'>
                   <img
                     src={item.picture ? item.picture : item.pictureSub}
-                    alt='pict'
+                    alt={item.name}
                   />
                 </figure>
                 <div className='preview__data'>
                   <h4 className='preview__title'>{item.name}</h4>
                 </div>
               </Link>
-            );
-          })}
-        </li>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
